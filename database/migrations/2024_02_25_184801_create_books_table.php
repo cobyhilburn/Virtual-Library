@@ -17,13 +17,15 @@ return new class extends Migration {
                 ->cascadeOnDelete();
             $table->string('title');
             $table->string('author');
-            $table->string('category');
+            $table->string('genre');
             $table->string('thumbnail')->nullable();
             $table->integer('page_count');
             $table->string('print_type');
             $table->date('published_date');
             $table->string('isbn');
             $table->text('description');
+            $table->string('status');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
