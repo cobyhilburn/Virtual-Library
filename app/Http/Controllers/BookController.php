@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
@@ -13,9 +14,11 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = $this->create();
-        print_r($books);
 
+        $books = Book::where('user_id', Auth::id())->get();
+
+
+        // future url = https://www.googleapis.com/books/v1/volumes?q{params}
         return Inertia::render('Dashboard', [
             'books' => $books,
         ]);
@@ -26,20 +29,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
-        Book::create([
-            'title' => 'The Great Gatsby',
-            'user_id' => 1, // 'user_id' is a foreign key in the 'books' table, and it references the 'id' column in the 'users' table
-            'author' => 'F. Scott Fitzgerald',
-            'genre' => 'Fiction',
-            'thumbnail' => 'https://via.placeholder.com/150',
-            'page_count' => 180,
-            'print_type' => 'Paperback',
-            'published_date' => '1925-04-10',
-            'isbn' => '9780743273565',
-            'description' => 'The Great Gatsby is a novel by American writer F. Scott Fitzgerald. Set in the Jazz Age on Long Island, the novel depicts narrator Nick Carraway\'s interactions with mysterious millionaire Jay Gatsby and Gatsby\'s obsession to reunite with his former lover, Daisy Buchanan.',
-            'status' => 'Available'
-        ]);
+
     }
 
     /**
