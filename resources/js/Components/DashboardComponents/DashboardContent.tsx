@@ -1,5 +1,4 @@
 import { Book } from '@/types'
-import React from 'react'
 import BookRow from './BookRow'
 
 
